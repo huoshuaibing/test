@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"reflect"
 )
 
 func main() {
@@ -16,4 +17,6 @@ func main() {
 		log.Fatalln()
 	}
 	fmt.Println(addrs[0])
+	fmt.Println(addrs[0].String())
+	fmt.Println(reflect.TypeOf(addrs[0].String()))
 }
