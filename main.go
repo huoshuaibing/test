@@ -59,6 +59,7 @@ func main() {
 		Filters: filters.Args{},
 	})
 	for _, con := range containers {
+		fmt.Println("test=======")
 		fmt.Println(con.Names[0])
 		fmt.Println(con.State)
 	}
