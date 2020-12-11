@@ -7,15 +7,13 @@ import (
 )
 
 func main() {
-	ip, err := net.InterfaceByName("eth0")
+	ips, err := net.InterfaceByName("eth0")
 	if err != nil {
 		log.Fatalln(err)
 	}
-	addrs, err := ip.Addrs()
+	addrs, err := ips.Addrs()
 	if err != nil {
 		log.Fatalln()
 	}
-	for _, addr := range addrs {
-		fmt.Println(addr)
-	}
+	fmt.Println(addrs[1])
 }
