@@ -15,5 +15,5 @@ func main() {
 	if err != nil {
 		log.Fatalln()
 	}
-	fmt.Println(addrs[1])
+	fmt.Println(addrs[0])
 }
