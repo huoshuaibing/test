@@ -23,16 +23,38 @@ import (
 // 	fmt.Println(addrs[0].String())
 // 	fmt.Println(reflect.TypeOf(addrs[0].String()))
 // }
-type info map[string]string
+// type info map[string]string
 
 //Deal is a func
-func Deal() (int, []info) {
-	// var number int
-	infoins := make(info)
-	con_list := make([]info, 100)
+// func Deal() (int, []info) {
+// 	// var number int
+// 	infoins := make(info)
+// 	con_list := make([]info)
+// 	cli, err := client.NewEnvClient()
+// 	if err != nil {
+// 		logrus.Errorln("init a new API client err")
+// 	}
+// 	containers, _ := cli.ContainerList(context.Background(), types.ContainerListOptions{
+// 		Size:    true,
+// 		All:     true,
+// 		Since:   "container",
+// 		Filters: filters.Args{},
+// 	})
+// 	var number int = len(containers)
+// 	for _, con := range containers {
+// 		name := con.Names[0][1:]
+// 		infoins[name] = con.State
+// 		con_list = append(con_list, infoins)
+// 	}
+// 	return number, con_list
+// }
+func main() {
+	// num, li := Deal()
+	// fmt.Println(num)
+	// fmt.Println(li)
 	cli, err := client.NewEnvClient()
 	if err != nil {
-		logrus.Errorln("init a new API client err")
+		logrus.Errorln("init a new api client err")
 	}
 	containers, _ := cli.ContainerList(context.Background(), types.ContainerListOptions{
 		Size:    true,
@@ -40,16 +62,9 @@ func Deal() (int, []info) {
 		Since:   "container",
 		Filters: filters.Args{},
 	})
-	var number int = len(containers)
 	for _, con := range containers {
-		name := con.Names[0][1:]
-		infoins[name] = con.State
-		con_list = append(con_list, infoins)
+		fmt.Println(con.Names)
+		fmt.Println(con.State)
 	}
-	return number, con_list
-}
-func main() {
-	num, li := Deal()
-	fmt.Println(num)
-	fmt.Println(li)
+
 }
