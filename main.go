@@ -11,7 +11,8 @@ import (
 
 func main() {
 	fmt.Println("11111")
-	cli, _ := client.NewEnvClient()
+	// cli, _ := client.NewEnvClient()
+	cli, _ := client.NewClientWithOpts(client.FromEnv)
 	fmt.Println("222")
 	containers, _ := cli.ContainerList(context.Background(), types.ContainerListOptions{
 		Size:    true,
