@@ -7,7 +7,6 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
-	"github.com/sirupsen/logrus"
 )
 
 // func main() {
@@ -52,10 +51,7 @@ func main() {
 	// num, li := Deal()
 	// fmt.Println(num)
 	// fmt.Println(li)
-	cli, err := client.NewEnvClient()
-	if err != nil {
-		logrus.Errorln("init a new api client err")
-	}
+	cli, _ := client.NewEnvClient()
 	containers, _ := cli.ContainerList(context.Background(), types.ContainerListOptions{
 		Size:    true,
 		All:     true,
@@ -63,8 +59,7 @@ func main() {
 		Filters: filters.Args{},
 	})
 	for _, con := range containers {
-		fmt.Println(con.Names)
+		fmt.Println(con.Names[0])
 		fmt.Println(con.State)
 	}
-
 }
