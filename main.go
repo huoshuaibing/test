@@ -22,16 +22,24 @@ func main() {
 			ip, _ := inter.Addrs()
 			IP := fmt.Sprintf("%v", ip)
 			iplist = append(iplist, IP)
-			for _, x := range iplist {
-				fmt.Println("---->", x)
-				if len(x) > 2 {
-					a := getip(x)
-					target = append(target, a)
-				}
-			}
-
+			// for _, x := range iplist {
+			// 	fmt.Println("---->", x)
+			// 	if len(x) > 2 {
+			// 		a := getip(x)
+			// 		target = append(target, a)
+			// 	}
+			// }
 		}
 	}
+	for _, x := range iplist {
+		fmt.Println("----->", x)
+		if len(x) > 2 {
+			a := getip(x)
+			fmt.Println("======>", a)
+			target = append(target, a)
+		}
+	}
+	fmt.Println("============================================")
 	fmt.Println(target)
 	fmt.Println(target[0])
 }
