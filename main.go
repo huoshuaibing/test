@@ -17,11 +17,12 @@ func main() {
 	for _, inter := range interfaces {
 		flags := inter.Flags.String()
 		fmt.Println(flags)
-		if strings.Contains(flags, "UP") && strings.Contains(flags, "broadcast") {
+		if strings.Contains(flags, "up") && strings.Contains(flags, "broadcast") {
 			ip, _ := inter.Addrs()
 			IP := fmt.Sprintf("%v", ip)
 			iplist = append(iplist, IP)
 		}
 	}
+	fmt.Println(iplist)
 	fmt.Println(strings.Split(iplist[0], "/"))
 }
