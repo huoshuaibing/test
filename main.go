@@ -24,6 +24,7 @@ func main() {
 		}
 	}
 	addrs, err := ips.Addrs()
+	fmt.Println(addrs)
 	if err != nil {
 		logrus.Fatalln(err)
 	}
