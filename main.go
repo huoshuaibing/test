@@ -40,10 +40,6 @@ func getip(s string) string {
 	if len(s) > 0 && s[0] == '[' {
 		s = s[1:]
 	}
-	fmt.Println(s[len(s)-4])
-	fmt.Println(s[len(s)-3])
-	fmt.Println(s[len(s)-2])
-	fmt.Println(s[len(s)-1])
 	if len(s) > 0 && s[len(s)-4] == '/' {
 		s = s[:len(s)-4]
 	}
