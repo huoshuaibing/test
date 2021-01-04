@@ -1,36 +1,35 @@
 package main
 
 import (
-	"context"
 	"fmt"
+	"net"
+	"os"
+	"strings"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/filters"
-	"github.com/docker/docker/client"
+	"github.com/sirupsen/logrus"
 )
 
-type info map[string]string
-
-func Deal() (int, []info) {
-	infoins := make(info)
-	con_list := make([]info, 100)
-	cli, _ := client.NewEnvClient()
-	containers, _ := cli.ContainerList(context.Background(), types.ContainerListOptions{
-		Size:    true,
-		All:     true,
-		Since:   "container",
-		Filters: filters.Args{},
-	})
-	var number int = len(containers)
-	for _, con := range containers {
-		name := con.Names[0][1:]
-		infoins[name] = con.State
-		con_list = append(con_list, infoins)
-	}
-	return number, con_list
-}
 func main() {
-	nu, li := Deal()
-	fmt.Println(nu)
-	fmt.Println(li)
+	ips, err := net.InterfaceByName("eth0")
+	if err != nil {
+		ips, err = net.InterfaceByName("eth1")
+		if err != nil {
+			ips, err = net.InterfaceByName("eth2")
+			if err != nil {
+				ips, err = net.InterfaceByName("eth3")
+				if err != nil {
+					ips, err = net.InterfaceByName("eth4")
+				}
+			}
+		}
+	}
+	addrs, err := ips.Addrs()
+	if err != nil {
+		logrus.Fatalln(err)
+	}
+	name, err := os.Hostname()
+	if err != nil {
+		logrus.Fatalln("Get Hostname failed", err)
+	}
+	fmt.Println(strings.Split(addrs[0].String(), "/")[0], name)
 }
