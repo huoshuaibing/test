@@ -17,7 +17,7 @@ func main() {
 	for _, inter := range interfaces {
 		flags := inter.Flags.String()
 		fmt.Println(flags)
-		if strings.Contains(flags, "up") && strings.Contains(flags, "broadcast") {
+		if strings.Contains(flags, "up") && strings.Contains(flags, "broadcast") && strings.Contains(inter.Name, "eth") {
 			ip, _ := inter.Addrs()
 			IP := fmt.Sprintf("%v", ip)
 			iplist = append(iplist, IP)
