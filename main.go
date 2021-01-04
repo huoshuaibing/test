@@ -33,7 +33,7 @@ func main() {
 	}
 	for _, x := range iplist {
 		fmt.Println("----->", x)
-		if len(x) > 2 && strings.Contains(x, "/") {
+		if len(x) > 2 && strings.Contains(x, "/24") {
 			a := getip(x)
 			fmt.Println("======>", a)
 			target = append(target, a)
