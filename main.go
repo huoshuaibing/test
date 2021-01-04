@@ -23,6 +23,7 @@ func main() {
 			IP := fmt.Sprintf("%v", ip)
 			iplist = append(iplist, IP)
 			for _, x := range iplist {
+				fmt.Println("---->", x)
 				if len(x) > 2 {
 					a := getip(x)
 					target = append(target, a)
