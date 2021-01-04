@@ -23,8 +23,6 @@ func main() {
 			IP := fmt.Sprintf("%v", ip)
 			iplist = append(iplist, IP)
 			for _, x := range iplist {
-				// a := getip(x)
-				// fmt.Println(len(a))
 				if len(x) > 2 {
 					a := getip(x)
 					target = append(target, a)
@@ -33,7 +31,7 @@ func main() {
 
 		}
 	}
-	fmt.Println(iplist)
+	fmt.Println(target)
 	fmt.Println(target[0])
 }
 
@@ -43,6 +41,9 @@ func getip(s string) string {
 		s = s[1:]
 	}
 	fmt.Println(s[len(s)-4])
+	fmt.Println(s[len(s)-3])
+	fmt.Println(s[len(s)-2])
+	fmt.Println(s[len(s)-1])
 	if len(s) > 0 && s[len(s)-4] == '/' {
 		s = s[:len(s)-4]
 	}
