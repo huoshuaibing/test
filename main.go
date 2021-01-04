@@ -41,7 +41,7 @@ func main() {
 	}
 	fmt.Println("============================================")
 	fmt.Println(target)
-	fmt.Println(target[0])
+	fmt.Println(strings.Split(target[0], "/"))
 }
 
 func getip(s string) string {
