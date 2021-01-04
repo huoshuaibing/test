@@ -11,6 +11,7 @@ import (
 func main() {
 	interfaces, err := net.Interfaces()
 	iplist := make([]string, 0)
+	target := make([]string, 0)
 	if err != nil {
 		logrus.Errorln("can not get local interface")
 	}
@@ -21,8 +22,14 @@ func main() {
 			ip, _ := inter.Addrs()
 			IP := fmt.Sprintf("%v", ip)
 			iplist = append(iplist, IP)
+			for _, x := range iplist {
+				fmt.Println(len(x))
+				if len(x) > 2 {
+					target = append(target, x)
+				}
+			}
 		}
 	}
 	fmt.Println(iplist)
-	fmt.Println(strings.Split(iplist[0], "/"))
+	fmt.Println(target[0])
 }
