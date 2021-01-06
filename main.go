@@ -62,8 +62,10 @@ func main() {
 
 func gettoken() string {
 	key := "gGZAsxHPrOQqCNoYVJbIMwzikRTveaEB"
-	curtimestamp := time.Now().Unix()
-	tar := key + strconv.FormatInt(curtimestamp, 10)
+	timestamp := time.Now().Format("2006-01-02")
+	t, _ := time.ParseInLocation("2006-01-02", timestamp, time.Local)
+	zerotimestamp := t.Unix()
+	tar := key + strconv.FormatInt(zerotimestamp, 10)
 	w := md5.New()
 	io.WriteString(w, tar)
 	md5str := fmt.Sprintf("%x", w.Sum(nil))
