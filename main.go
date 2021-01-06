@@ -1,56 +1,71 @@
 package main
 
 import (
+	"crypto/md5"
 	"fmt"
-	"net"
-	"strings"
-
-	"github.com/sirupsen/logrus"
+	"io"
+	"strconv"
+	"time"
 )
 
+// func main() {
+// 	interfaces, err := net.Interfaces()
+// 	iplist := make([]string, 0)
+// 	target := make([]string, 0)
+// 	if err != nil {
+// 		logrus.Errorln("can not get local interface")
+// 	}
+// 	for _, inter := range interfaces {
+// 		flags := inter.Flags.String()
+// 		fmt.Println(flags)
+// 		if strings.Contains(flags, "up") && strings.Contains(flags, "broadcast") && strings.Contains(inter.Name, "eth") {
+// 			ip, _ := inter.Addrs()
+// 			IP := fmt.Sprintf("%v", ip)
+// 			iplist = append(iplist, IP)
+// 			// for _, x := range iplist {
+// 			// 	fmt.Println("---->", x)
+// 			// 	if len(x) > 2 {
+// 			// 		a := getip(x)
+// 			// 		target = append(target, a)
+// 			// 	}
+// 			// }
+// 		}
+// 	}
+// 	for _, x := range iplist {
+// 		fmt.Println("----->", x)
+// 		if len(x) > 2 && strings.Contains(x, "/24") {
+// 			a := getip(x)
+// 			fmt.Println("======>", a)
+// 			target = append(target, a)
+// 		}
+// 	}
+// 	fmt.Println("============================================")
+// 	fmt.Println(target)
+// 	fmt.Println(strings.Split(target[0], "/")[0])
+// }
+
+// func getip(s string) string {
+// 	s = strings.Split(s, " ")[0]
+// 	if len(s) > 0 && s[0] == '[' {
+// 		s = s[1:]
+// 	}
+// 	if len(s) > 0 && s[len(s)-4] == '/' {
+// 		s = s[:len(s)-4]
+// 	}
+// 	return s
+// }
+
 func main() {
-	interfaces, err := net.Interfaces()
-	iplist := make([]string, 0)
-	target := make([]string, 0)
-	if err != nil {
-		logrus.Errorln("can not get local interface")
-	}
-	for _, inter := range interfaces {
-		flags := inter.Flags.String()
-		fmt.Println(flags)
-		if strings.Contains(flags, "up") && strings.Contains(flags, "broadcast") && strings.Contains(inter.Name, "eth") {
-			ip, _ := inter.Addrs()
-			IP := fmt.Sprintf("%v", ip)
-			iplist = append(iplist, IP)
-			// for _, x := range iplist {
-			// 	fmt.Println("---->", x)
-			// 	if len(x) > 2 {
-			// 		a := getip(x)
-			// 		target = append(target, a)
-			// 	}
-			// }
-		}
-	}
-	for _, x := range iplist {
-		fmt.Println("----->", x)
-		if len(x) > 2 && strings.Contains(x, "/24") {
-			a := getip(x)
-			fmt.Println("======>", a)
-			target = append(target, a)
-		}
-	}
-	fmt.Println("============================================")
-	fmt.Println(target)
-	fmt.Println(strings.Split(target[0], "/")[0])
+	str := gettoken()
+	fmt.Println(str)
 }
 
-func getip(s string) string {
-	s = strings.Split(s, " ")[0]
-	if len(s) > 0 && s[0] == '[' {
-		s = s[1:]
-	}
-	if len(s) > 0 && s[len(s)-4] == '/' {
-		s = s[:len(s)-4]
-	}
-	return s
+func gettoken() string {
+	key := "gGZAsxHPrOQqCNoYVJbIMwzikRTveaEB"
+	curtimestamp := time.Now().Unix()
+	tar := key + strconv.FormatInt(curtimestamp, 10)
+	w := md5.New()
+	io.WriteString(w, tar)
+	md5str := fmt.Sprintf("%x", w.Sum(nil))
+	return md5str
 }
